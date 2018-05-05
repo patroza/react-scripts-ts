@@ -54,7 +54,7 @@ module.exports = {
   appBuild: resolveApp('build'),
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
-  appIndexJs: resolveApp('src/index.js'),
+  //appIndexJs: resolveApp('src/index.js'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   //testsSetup: resolveApp('src/setupTests.js'),
@@ -62,6 +62,7 @@ module.exports = {
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
 
+  appIndexJs: resolveApp('src/index.tsx'),
   testsSetup: resolveApp('src/setupTests.ts'),
   appTsConfig: resolveApp('tsconfig.json'),
   appTsLint: resolveApp('tslint.json'),
@@ -79,7 +80,7 @@ module.exports = {
   appBuild: resolveApp('build'),
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
-  appIndexJs: resolveApp('src/index.js'),
+  //appIndexJs: resolveApp('src/index.js'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   //testsSetup: resolveApp('src/setupTests.js'),
@@ -90,6 +91,7 @@ module.exports = {
   ownPath: resolveOwn('.'),
   ownNodeModules: resolveOwn('node_modules'), // This is empty on npm 3
 
+  appIndexJs: resolveApp('src/index.tsx'),
   testsSetup: resolveApp('src/setupTests.ts'),
   appTsConfig: resolveApp('tsconfig.json'),
   appTsTestConfig: resolveApp('tsconfig.test.json'),
@@ -109,7 +111,7 @@ if (useTemplate) {
     appBuild: resolveOwn('../../build'),
     appPublic: resolveOwn('template/public'),
     appHtml: resolveOwn('template/public/index.html'),
-    appIndexJs: resolveOwn('template/src/index.js'),
+    //appIndexJs: resolveOwn('template/src/index.js'),
     appPackageJson: resolveOwn('package.json'),
     appSrc: resolveOwn('template/src'),
     //testsSetup: resolveOwn('template/src/setupTests.js'),
@@ -120,6 +122,7 @@ if (useTemplate) {
     ownPath: resolveOwn('.'),
     ownNodeModules: resolveOwn('node_modules'),
 
+    appIndexJs: resolveOwn('template/src/index.tsx'),
     testsSetup: resolveOwn('template/src/setupTests.ts'),
     appTsConfig: resolveOwn('template/tsconfig.json'),
     appTsLint: resolveOwn('template/tslint.json'),
