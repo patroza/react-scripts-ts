@@ -16,7 +16,7 @@ module.exports = (resolve, rootDir, srcRoots) => {
   // Use this instead of `paths.testsSetup` to avoid putting
   // an absolute filename into configuration after ejecting.
   const setupTestsFile = fs.existsSync(paths.testsSetup)
-    ? '<rootDir>/src/setupTests.js'
+    ? '<rootDir>/src/setupTests.ts'
     : undefined;
 
   const toRelRootDir = f => '<rootDir>/' + path.relative(rootDir || '', f);
@@ -104,7 +104,7 @@ module.exports = (resolve, rootDir, srcRoots) => {
               chalk.bold('setupTestFrameworkScriptFile') +
               ' in your package.json.\n\n' +
               'Remove it from Jest configuration, and put the initialization code in ' +
-              chalk.bold('src/setupTests.js') +
+              chalk.bold('src/setupTests.ts') +
               '.\nThis file will be loaded automatically.\n'
           )
         );
