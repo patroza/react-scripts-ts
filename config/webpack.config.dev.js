@@ -140,11 +140,11 @@ module.exports = {
       '.web.tsx',
       '.tsx',
       '.web.js',
-      '.mjs',
       '.js',
       '.json',
       '.web.jsx',
       '.jsx',
+      '.mjs',
     ],
     alias: {
       // @remove-on-eject-begin

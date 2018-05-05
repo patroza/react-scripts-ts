@@ -58,12 +58,12 @@ module.exports = (resolve, rootDir, srcRoots) => {
       'web.tsx',
       'tsx',
       'web.js',
-      'mjs',
       'js',
       'json',
       'web.jsx',
       'jsx',
       'node',
+      'mjs',
     ],
     globals: {
       'ts-jest': {
