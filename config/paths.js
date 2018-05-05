@@ -57,10 +57,14 @@ module.exports = {
   appIndexJs: resolveApp('src/index.js'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
-  testsSetup: resolveApp('src/setupTests.js'),
+  //testsSetup: resolveApp('src/setupTests.js'),
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
+
+  testsSetup: resolveApp('src/setupTests.ts'),
+  appTsConfig: resolveApp('tsconfig.json'),
+  appTsLint: resolveApp('tslint.json'),
 };
 
 let checkForMonorepo = true;
@@ -78,13 +82,18 @@ module.exports = {
   appIndexJs: resolveApp('src/index.js'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
-  testsSetup: resolveApp('src/setupTests.js'),
+  //testsSetup: resolveApp('src/setupTests.js'),
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
   // These properties only exist before ejecting:
   ownPath: resolveOwn('.'),
   ownNodeModules: resolveOwn('node_modules'), // This is empty on npm 3
+
+  testsSetup: resolveApp('src/setupTests.ts'),
+  appTsConfig: resolveApp('tsconfig.json'),
+  appTsTestConfig: resolveApp('tsconfig.test.json'),
+  appTsLint: resolveApp('tslint.json'),
 };
 
 // detect if template should be used, ie. when cwd is react-scripts itself
@@ -103,13 +112,18 @@ if (useTemplate) {
     appIndexJs: resolveOwn('template/src/index.js'),
     appPackageJson: resolveOwn('package.json'),
     appSrc: resolveOwn('template/src'),
-    testsSetup: resolveOwn('template/src/setupTests.js'),
+    //testsSetup: resolveOwn('template/src/setupTests.js'),
     appNodeModules: resolveOwn('node_modules'),
     publicUrl: getPublicUrl(resolveOwn('package.json')),
     servedPath: getServedPath(resolveOwn('package.json')),
     // These properties only exist before ejecting:
     ownPath: resolveOwn('.'),
     ownNodeModules: resolveOwn('node_modules'),
+
+    testsSetup: resolveOwn('template/src/setupTests.ts'),
+    appTsConfig: resolveOwn('template/tsconfig.json'),
+    appTsLint: resolveOwn('template/tslint.json'),
+    appTsTestConfig: resolveOwn('template/tsconfig.test.json'),
   };
 }
 // @remove-on-eject-end
