@@ -155,6 +155,29 @@ module.exports = function(
     command = 'npm';
     args = ['install', '--save', verbose && '--verbose'].filter(e => e);
   }
+
+  // Install dev dependencies
+  const types = [
+    '@types/node@9.6.7',
+    '@types/react',
+    '@types/react-dom',
+    '@types/jest',
+    'typescript',
+  ];
+
+  console.log(
+    `Installing ${types.join(', ')} as dev dependencies ${command}...`
+  );
+  console.log();
+
+  const devProc = spawn.sync(command, args.concat('-D').concat(types), {
+    stdio: 'inherit',
+  });
+  if (devProc.status !== 0) {
+    console.error(`\`${command} ${args.concat(types).join(' ')}\` failed`);
+    return;
+  }
+
   args.push('react', 'react-dom');
 
   // Install additional template dependencies, if present
