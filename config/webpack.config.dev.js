@@ -201,23 +201,6 @@ module.exports = {
         include: paths.srcPaths,
         exclude: [/[/\\\\]node_modules[/\\\\]/],
       },
-
-
-      // Compile .tsx?
-      {
-        test: /\.(ts|tsx)$/,
-        include: paths.srcPaths,
-        use: [
-          {
-            loader: require.resolve('ts-loader'),
-            options: {
-              // disable type checker - we will use it in fork plugin
-              transpileOnly: true,
-            },
-          },
-        ],
-      },
-
       {
         // "oneOf" will traverse all following loaders until one will
         // match the requirements. When no loader matches it will fall
@@ -233,6 +216,21 @@ module.exports = {
               limit: 10000,
               name: 'static/media/[name].[hash:8].[ext]',
             },
+          },
+          // Compile .tsx?
+          {
+            test: /\.(tsx?)$/,
+            include: paths.srcPaths,
+            exclude: [/([/\\\\]node_modules[/\\\\])|\.test\.|\.story\./],
+            use: [
+              {
+                loader: require.resolve('ts-loader'),
+                options: {
+                  // disable type checker - we will use it in fork plugin
+                  transpileOnly: true,
+                },
+              },
+            ],
           },
           // Process application JS with Babel.
           // The preset includes JSX, Flow, and some ESnext features.
