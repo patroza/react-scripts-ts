@@ -21,6 +21,7 @@ const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 
+const { CheckerPlugin } = require('awesome-typescript-loader');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -198,7 +199,7 @@ module.exports = {
           },
         ],
         include: paths.srcPaths,
-        exclude: [/[/\\\\]node_modules[/\\\\]/],
+        exclude: [/node_modules|\.test\.|\.story\./],
       },
       {
         // "oneOf" will traverse all following loaders until one will
@@ -220,16 +221,17 @@ module.exports = {
           {
             test: /\.(tsx?)$/,
             include: paths.srcPaths,
-            exclude: [/([/\\\\]node_modules[/\\\\])|\.test\.|\.story\./],
+            exclude: [/node_modules|\.test\.|\.story\./],
             use: [
-              // This loader caches the output
-              require.resolve('cache-loader'),
-              // This loader parallelizes code compilation, it is optional but
-              // improves compile time on larger projects
-              require.resolve('thread-loader'),
               {
-                loader: require.resolve('ts-loader'),
-              },
+                loader: require.resolve('awesome-typescript-loader'),
+                options: {
+                  reportFiles: [
+                    "src/**/*.{ts,tsx}",
+                  ],
+                  useCache: true,
+                }
+              }
             ],
           },
           // Process application JS with Babel.
@@ -237,10 +239,8 @@ module.exports = {
           {
             test: /\.(js|jsx|mjs)$/,
             include: paths.srcPaths,
-            exclude: [/[/\\\\]node_modules[/\\\\]/],
+            exclude: [/node_modules|\.test\.|\.story\./],
             use: [
-              // This loader caches the output
-              require.resolve('cache-loader'),
               // This loader parallelizes code compilation, it is optional but
               // improves compile time on larger projects
               require.resolve('thread-loader'),
@@ -277,8 +277,6 @@ module.exports = {
           {
             test: /\.js$/,
             use: [
-              // This loader caches the output
-              require.resolve('cache-loader'),
               // This loader parallelizes code compilation, it is optional but
               // improves compile time on larger projects
               require.resolve('thread-loader'),
@@ -402,6 +400,8 @@ module.exports = {
     // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
     // You can remove this if you don't use Moment.js:
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+
+    new CheckerPlugin(),
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.
