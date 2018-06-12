@@ -199,7 +199,7 @@ module.exports = {
           },
         ],
         include: paths.srcPaths,
-        exclude: [/[/\\\\]node_modules[/\\\\]/],
+        exclude: [/node_modules/],
       },
       {
         // "oneOf" will traverse all following loaders until one will
@@ -221,7 +221,7 @@ module.exports = {
           {
             test: /\.(tsx?)$/,
             include: paths.srcPaths,
-            exclude: [/([/\\\\]node_modules[/\\\\])|\.test\.|\.story\./],
+            exclude: [/node_modules/],
             use: [
               {
                 loader: require.resolve('ts-loader'),
@@ -237,7 +237,7 @@ module.exports = {
           {
             test: /\.(js|jsx|mjs)$/,
             include: paths.srcPaths,
-            exclude: [/[/\\\\]node_modules[/\\\\]/],
+            exclude: [/node_modules/],
             use: [
               // This loader parallelizes code compilation, it is optional but
               // improves compile time on larger projects
