@@ -281,9 +281,9 @@ module.exports = {
               require.resolve('thread-loader'),
               {
                 loader: require.resolve('ts-loader'),
-                // stop error reporting to webpack, for thread-loader. the fork plugin will do that instead
-                happyPackMode: true,
                 options: {
+                  // stop error reporting to webpack, for thread-loader. the fork plugin will do that instead
+                  happyPackMode: true,
                   // disable type checker - we will use it in fork plugin
                   transpileOnly: true,
                 },
