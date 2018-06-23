@@ -512,6 +512,9 @@ module.exports = {
 
     // Perform type checking and linting in a separate process to speed up compilation
     new ForkTsCheckerWebpackPlugin({
+      // Since we use happypack mode in ts-loader
+      checkSyntacticErrors: true,
+
       async: false,
       tsconfig: paths.appTsConfig,
       tslint: paths.appTsLint,
