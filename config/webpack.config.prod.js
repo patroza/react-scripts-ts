@@ -276,6 +276,9 @@ module.exports = {
             include: paths.srcPaths,
             exclude: [/[/\\\\]node_modules[/\\\\]/],
             use: [
+              // This loader parallelizes code compilation, it is optional but
+              // improves compile time on larger projects
+              require.resolve('thread-loader'),
               {
                 loader: require.resolve('ts-loader'),
                 options: {
