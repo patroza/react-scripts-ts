@@ -281,6 +281,8 @@ module.exports = {
               require.resolve('thread-loader'),
               {
                 loader: require.resolve('ts-loader'),
+                // stop error reporting to webpack, for thread-loader. the fork plugin will do that instead
+                happyPackMode: true,
                 options: {
                   // disable type checker - we will use it in fork plugin
                   transpileOnly: true,
@@ -288,10 +290,15 @@ module.exports = {
               },
             ],
           },
+          {
+            test: /\.mjs$/,
+            include: /node_modules/,
+            type: "javascript/auto",
+          },
           // Process application JS with Babel.
           // The preset includes JSX, Flow, and some ESnext features.
           {
-            test: /\.(js|jsx|mjs)$/,
+            test: /\.(js|jsx)$/,
             include: paths.srcPaths,
             exclude: [/[/\\\\]node_modules[/\\\\]/],
             use: [
