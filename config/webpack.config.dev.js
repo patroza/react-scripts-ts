@@ -22,7 +22,6 @@ const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const ManifestPlugin = require('webpack-manifest-plugin');
 
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -435,15 +434,15 @@ module.exports = {
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 
     // Perform type checking and linting in a separate process to speed up compilation
-    new ForkTsCheckerWebpackPlugin({
-      // Since we use happypack mode in ts-loader
-      checkSyntacticErrors: true,
+    // new ForkTsCheckerWebpackPlugin({
+    //   // Since we use happypack mode in ts-loader
+    //   checkSyntacticErrors: true,
 
-      async: false,
-      watch: paths.srcPaths,
-      tsconfig: paths.appTsConfig,
-      tslint: paths.appTsLint,
-    }),
+    //   async: false,
+    //   watch: paths.srcPaths,
+    //   tsconfig: paths.appTsConfig,
+    //   tslint: paths.appTsLint,
+    // }),
 
     // Generate a manifest file which contains a mapping of all asset filenames
     // to their corresponding output file so that tools can pick it up without
