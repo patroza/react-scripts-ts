@@ -217,6 +217,21 @@ module.exports = {
         // match the requirements. When no loader matches it will fall
         // back to the "file" loader at the end of the loader list.
         oneOf: [
+          {
+            test: /\.svg$/,
+            issuer: {
+              test: /\.jsx?|tsx?$/
+            },
+            use: [
+              {
+                loader: require.resolve('svgr/webpack'),
+                options: {
+                  icon: true,
+                  expandProps: true,
+                },
+              },
+            ],
+          },
           // "url" loader works like "file" loader except that it embeds assets
           // smaller than specified limit in bytes as data URLs to avoid requests.
           // A missing `test` is equivalent to a match.
@@ -283,13 +298,6 @@ module.exports = {
                   plugins: [
                     [
                       require.resolve('babel-plugin-named-asset-import'),
-                      {
-                        loaderMap: {
-                          svg: {
-                            ReactComponent: 'svgr/webpack![path]',
-                          },
-                        },
-                      },
                     ],
                   ],
                   // This is a feature of `babel-loader` for webpack (not Babel itself).

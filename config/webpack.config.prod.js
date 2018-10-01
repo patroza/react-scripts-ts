@@ -259,6 +259,22 @@ module.exports = {
         // match the requirements. When no loader matches it will fall
         // back to the "file" loader at the end of the loader list.
         oneOf: [
+          {
+            test: /\.svg$/,
+            issuer: {
+              test: /\.jsx?|tsx?$/
+            },
+            use: [
+              {
+                loader: require.resolve('svgr/webpack'),
+                options: {
+                  icon: true,
+                  expandProps: true,
+                },
+              },
+            ],
+          },
+
           // "url" loader works just like "file" loader but it also embeds
           // assets smaller than specified size as data URLs to avoid requests.
           {
@@ -315,13 +331,6 @@ module.exports = {
                   plugins: [
                     [
                       require.resolve('babel-plugin-named-asset-import'),
-                      {
-                        loaderMap: {
-                          svg: {
-                            ReactComponent: 'svgr/webpack![path]',
-                          },
-                        },
-                      },
                     ],
                   ],
                   compact: true,
