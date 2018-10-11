@@ -40,6 +40,8 @@ const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
+const hash = require('string-hash');
+
 // common function to get style loaders
 const getStyleLoaders = (cssOptions, preProcessor) => {
   const loaders = [
@@ -222,15 +224,18 @@ module.exports = {
             issuer: {
               test: /\.jsx?|tsx?$/
             },
-            use: [
-              {
-                loader: require.resolve('svgr/webpack'),
-                options: {
-                  icon: true,
-                  expandProps: true,
-                },
-              },
-            ],
+            use: ({resource}) => ({
+              loader: require.resolve('@svgr/webpack'),
+              options: {
+                svgoConfig: {
+                  plugins: [{
+                    "cleanupIDs": {
+                      "prefix": `svg${hash(resource)}`
+                    }
+                  }]
+                }
+              }
+            }),
           },
           // "url" loader works like "file" loader except that it embeds assets
           // smaller than specified limit in bytes as data URLs to avoid requests.

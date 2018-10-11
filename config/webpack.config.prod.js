@@ -24,6 +24,8 @@ const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
 
+const hash = require('string-hash');
+
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
@@ -264,15 +266,18 @@ module.exports = {
             issuer: {
               test: /\.jsx?|tsx?$/
             },
-            use: [
-              {
-                loader: require.resolve('svgr/webpack'),
-                options: {
-                  icon: true,
-                  expandProps: true,
-                },
-              },
-            ],
+            use: ({resource}) => ({
+              loader: require.resolve('@svgr/webpack'),
+              options: {
+                svgoConfig: {
+                  plugins: [{
+                    "cleanupIDs": {
+                      "prefix": `svg${hash(resource)}`
+                    }
+                  }]
+                }
+              }
+            }),
           },
 
           // "url" loader works just like "file" loader but it also embeds
