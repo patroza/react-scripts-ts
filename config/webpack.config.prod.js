@@ -269,6 +269,7 @@ module.exports = {
             use: ({resource}) => ({
               loader: require.resolve('@svgr/webpack'),
               options: {
+                icon: true,
                 svgoConfig: {
                   plugins: [{
                     "cleanupIDs": {
